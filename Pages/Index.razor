@@ -10,7 +10,7 @@
     </SfComboBox>
 </div>
 <div class="control_wrapper">
-    <SfComboBox PopupHeight="400px" PopupWidth="350px" TItem="ComboBoxDataModel" TValue="string"
+    <SfComboBox PopupHeight="400px" PopupWidth="350px" @bind-Value="@statevalue" TItem="ComboBoxDataModel" TValue="string"
                 DataSource="@ComboBoxData1" Placeholder="Select a state" Enabled="@EnableComboBox"
                 Query="@DataQuery">
         <ComboBoxFieldSettings Value="StateId" Text="StateName"></ComboBoxFieldSettings>
@@ -21,10 +21,12 @@
 
     public bool EnableComboBox = false;
     public Query DataQuery { get; set; } = null;
+    public string statevalue = null;
     public void OnCountryChange(Syncfusion.Blazor.DropDowns.ChangeEventArgs<string, ComboBoxDataModel> args)
     {
         this.EnableComboBox = true;
         this.DataQuery = new Query().Where(new WhereFilter() { Field = "CountryId", Operator = "equal", value = args.Value });
+        this.statevalue = null;
     }
 
 
@@ -50,15 +52,6 @@
         new ComboBoxDataModel() {  StateId = 105, StateName = "Queensland", CountryId = 2 }
     };
 }
-
-
-
-
-
-
-
-
-
 
 
 <style>
